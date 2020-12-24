@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              mc:Ignorable="d"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converter="clr-namespace:DMapp.Converters"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:template="clr-namespace:DMapp.View.Templates"
+             xmlns:viewModel="clr-namespace:DMapp.ViewModel"
+             
+             x:Class="DMapp.View.ItemsPage"
+              BackgroundColor="{DynamicResource Gray-White}"
+             NavigationPage.HasNavigationBar="True"
+             x:Name="ItPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="DashboardStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:BooleanToColorConverter x:Key="BooleanToColorConverter" />
+            <converter:BooleanToStringConverter x:Key="BoolToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New Decision" Command="{Binding NewDecisionCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid RowSpacing="0" ColumnSpacing="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <template:ExpenseChartTemplate Grid.Row="0" />
+
+                <Grid Grid.Row="1">
+
+                    <Label Margin="16,26,16,16"
+                           Text="DECISIONS"
+                           TextColor="{DynamicResource Gray-800}"
+                           FontSize="12"
+                           LineHeight="{OnPlatform Android=1.5, Default=-1}"
+                           FontFamily="{DynamicResource Montserrat-SemiBold}"
+                           HorizontalOptions="Start" />
+
+                    <!--<buttons:SfButton Margin="11,26,11,16"
+                                      BorderWidth="0"
+                                      TextColor="{DynamicResource Gray-600}"
+                                      BackgroundColor="{DynamicResource Transparent}"
+                                      WidthRequest="72"
+                                      HeightRequest="18"
+                                      CornerRadius="4"
+                                      HorizontalOptions="End">
+                        <Label Text="VIEW ALL"
+                               TextColor="{DynamicResource Link}"
+                               FontSize="12"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               LineHeight="{OnPlatform Android=1.5, Default=-1}"
+                               FontFamily="{DynamicResource Montserrat-SemiBold}" />
+                    </buttons:SfButton>-->
+
+                </Grid>
+
+                <ListView Grid.Row="2" 
+                          x:Name="itemList"          
+                         ItemsSource="{Binding Decisions}" HasUnevenRows="False"  RowHeight="68" SeparatorVisibility="Default" SeparatorColor="Purple"  ItemSelected="ListView_ItemSelected" >
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell  >
+                                
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Details"
+                                              Command="{Binding Path=BindingContext.DetailsCommand, Source={x:Reference Name=ItPage}}"
+                                              CommandParameter="{Binding}"/>
+
+                                    <MenuItem Text="Delete"
+                                              Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference Name=ItPage}}"
+                                              CommandParameter="{Binding}"
+                                               IsDestructive="True"/>
+
+                                </ViewCell.ContextActions>
+
+
+                                <StackLayout Margin="17,0,0,0">
+                                    <!--Title-->
+                                    <Label
+                                       Margin="0,15,0,4"
+                                       HorizontalOptions="StartAndExpand"
+                                       Text="{Binding Title}"
+                                       Style="{StaticResource LabelStyle}"
+                                       LineHeight="{OnPlatform Android=1.5, Default=-1}" />
+                            
+                                    <!--Goal-->
+                                    <Label 
+                                       Margin="0,0,0,16"
+                                       HorizontalOptions="Start"
+                                       Text="{Binding Goal}"
+                                       TextColor="{DynamicResource Gray-700}"
+                                       FontSize="12"
+                                       FontFamily="{DynamicResource Montserrat-Medium}"
+                                       LineHeight="{OnPlatform Android=1.5, Default=-1}" />
+                                </StackLayout>
+                                    
+                            </ViewCell>
+                           
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

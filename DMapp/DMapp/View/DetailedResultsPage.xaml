@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMapp.View.DetailedResultsPage"
+             >
+
+    
+    <ScrollView Orientation="Vertical"  >
+        
+        <Grid Padding="0" ColumnSpacing="0" RowSpacing="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="{Binding OptionsRowHeight}" />
+                <RowDefinition x:Name="ListRow"/>
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="118"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="160"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Frames to create table border-->
+            <Frame   Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Style="{StaticResource TableBorder}" BackgroundColor="Beige"  ></Frame>
+            <Frame   Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" Style="{StaticResource TableBorder}" BackgroundColor="Beige"> </Frame>
+            <Frame   Grid.Row="1"  Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource TableBorder}" BackgroundColor="Beige"></Frame>
+            <Frame   Grid.Row="2"  Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource TableBorder}" ></Frame>
+            <Frame   Grid.Row="3" Grid.Column="0" Style="{StaticResource TableBorder}" ></Frame>
+            <Frame   Grid.Row="3" Grid.Column="1" Style="{StaticResource TableBorder}" ></Frame>
+            <Frame   Grid.Row="3" Grid.Column="2" Style="{StaticResource TableBorder}"></Frame>
+            <Frame   Grid.Row="3" Grid.Column="3" Style="{StaticResource TableBorder}" IsVisible="{Binding Column3FrameVisibility}" ></Frame>
+            <Frame   Grid.Row="3" Grid.Column="4" Style="{StaticResource TableBorder}" IsVisible="{Binding Column4FrameVisibility}"></Frame>
+            
+            <Frame   Grid.Row="4" Grid.Column="0" Style="{StaticResource TableBorder}" BackgroundColor="Transparent"></Frame>
+            <Frame   Grid.Row="4" Grid.Column="1" Style="{StaticResource TableBorder}" BackgroundColor="Beige"></Frame>
+            <Frame   Grid.Row="4" Grid.Column="2" Style="{StaticResource TableBorder}" BackgroundColor="Beige"></Frame>
+            <Frame   Grid.Row="4" Grid.Column="3" Style="{StaticResource TableBorder}" BackgroundColor="{Binding Column3LastRowColor}" IsVisible="{Binding Column3FrameVisibility}"></Frame>
+            <Frame   Grid.Row="4" Grid.Column="4" Style="{StaticResource TableBorder}" BackgroundColor="{Binding Column4LastRowColor}" IsVisible="{Binding Column4FrameVisibility}"></Frame>
+            <!--Wider lines below-->
+            <Frame  TranslationY="-1" Grid.Row="4" Grid.Column="0" Style="{StaticResource TableBorder}" BackgroundColor="Transparent"></Frame>
+            <Frame  TranslationY="-1" Grid.Row="4" Grid.Column="1" Style="{StaticResource TableBorder}" BackgroundColor="Transparent"></Frame>
+            <Frame  TranslationY="-1" Grid.Row="4" Grid.Column="2" Style="{StaticResource TableBorder}" BackgroundColor="Transparent"></Frame>
+            <Frame  TranslationY="-1" Grid.Row="4" Grid.Column="3" Style="{StaticResource TableBorder}" BackgroundColor="Transparent" IsVisible="{Binding Column3FrameVisibility}"></Frame>
+            <Frame  TranslationY="-1" Grid.Row="4" Grid.Column="4" Style="{StaticResource TableBorder}" BackgroundColor="Transparent" IsVisible="{Binding Column4FrameVisibility}"></Frame>
+
+            <!--Colorful boxes to visualize columns and rows (for debuging purposes)-->
+            
+            <!--<BoxView Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" BackgroundColor="Firebrick" />
+            <BoxView Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" BackgroundColor="DarkBlue" />
+            <BoxView Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" BackgroundColor="Green" />
+            <BoxView Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" BackgroundColor="Orange" />
+
+            <BoxView Grid.Row="3" Grid.Column="0" BackgroundColor="Purple" />
+            <BoxView Grid.Row="3" Grid.Column="1" BackgroundColor="Brown"/>
+            <BoxView Grid.Row="3" Grid.Column="2" BackgroundColor="Yellow"/>
+            <BoxView Grid.Row="3" Grid.Column="3" BackgroundColor="Chartreuse"/>
+            <BoxView Grid.Row="3" Grid.Column="4" BackgroundColor="Pink"/>
+
+            <BoxView Grid.Column="1" Grid.Row="4" BackgroundColor="Aquamarine"/>
+            <BoxView Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" BackgroundColor="ForestGreen"/>-->
+
+            
+            <!--Row 0-->
+
+            <Slider Minimum="{Binding SliderMin}" Maximum="{Binding SliderMax}" Value="{Binding SliderValue}"
+                    Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" Opacity="0.8"
+                    MinimumTrackColor="Green" MaximumTrackColor="Cyan"  BackgroundColor="Black" 
+                    VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="430" HeightRequest="25"
+                     ThumbColor="HotPink"  >
+            </Slider>
+
+            <Button Command="{Binding LeftButtonClickedCommand}"   Grid.Row="0" Grid.Column="2"
+                    VerticalOptions="Center" HorizontalOptions="Start" WidthRequest="32" HeightRequest="30"
+                      FontAttributes="Bold" CornerRadius="0"  BorderColor="Black" BorderWidth="2" />
+            <Button Command="{Binding RightButtonClickedCommand}"   Grid.Row="0" Grid.Column="4"
+                    VerticalOptions="Center" HorizontalOptions="End" WidthRequest="32" HeightRequest="30"
+                       FontAttributes="Bold" CornerRadius="0" BorderColor="Black" BorderWidth="2" TranslationX="-1"  />
+            
+            <!--Row 1 and 2-->
+
+            <Label Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Text="Qualities"  Style="{StaticResource MainColumnLabelStyle}" FontSize="15" TranslationY="13"/>
+            <Label FontSize="13" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Text="Qualities' importance" Style="{StaticResource MainColumnLabelStyle}"  TranslationX="13" TranslationY="13" />
+            <Label Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3" Text="Options' weights" Style="{StaticResource MainColumnLabelStyle}" />
+
+            <Label Grid.Row="1" Grid.Column="4" Text="{Binding Index}" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" TextColor="Black" TranslationX="-18"/>
+
+            <Label Padding="4,0,2.5,2" Grid.Row="2" Grid.Column="2"  Text="{Binding Option1ToDisplay}" Style="{StaticResource OptionsNameLabelStyle}"/>
+            <Label Padding="4,0,2.5,2" Grid.Row="2" Grid.Column="3"  Text="{Binding Option2ToDisplay}" Style="{StaticResource OptionsNameLabelStyle}" />
+            <Label Padding="4,0,3,2" Grid.Row="2" Grid.Column="4"  Text="{Binding Option3ToDisplay}" Style="{StaticResource OptionsNameLabelStyle}"/>
+
+            
+            <!--Row 3-->
+            <ListView  Grid.Row="3" Grid.Column="0"  ItemsSource="{Binding QualitiesNames}" Style="{StaticResource ListViewStyle}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label  Padding="6,0,2,0" Text="{Binding}" Style="{StaticResource StandardLabelStyle}" FontSize="13"/>
+                            
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView  Grid.Row="3" Grid.Column="1" ItemsSource="{Binding QualitiesImportance}" Style="{StaticResource ListViewStyle}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding}" Style="{StaticResource StandardLabelStyle}" FontSize="13" />
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView Grid.Row="3" Grid.Column="2" ItemsSource="{Binding WeightsToDisplayColumn1}" Style="{StaticResource ListViewStyle}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label  Text="{Binding}" Style="{StaticResource StandardLabelStyle}" FontSize="13"/>
+
+                        </ViewCell>
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView  Grid.Row="3" Grid.Column="3" ItemsSource="{Binding WeightsToDisplayColumn2}" Style="{StaticResource ListViewStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label  Text="{Binding}" Style="{StaticResource StandardLabelStyle}" FontSize="13"/>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ListView  Grid.Row="3" Grid.Column="4" ItemsSource="{Binding WeightsToDisplayColumn3}" Style="{StaticResource ListViewStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label  Text="{Binding}" Style="{StaticResource StandardLabelStyle}" FontSize="13"/>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <!--Row 4-->
+            <Label Grid.Column="0" Grid.Row="4" Text="More information" Style="{StaticResource StandardLabelStyle}" Padding="4,0,4,0" FontSize="13" />
+            <Label Grid.Column="1" Grid.Row="4" Text="Final score" Style="{StaticResource MainColumnLabelStyle}" FontAttributes="Bold" Padding="4,0,4,0" FontSize="13" />
+            <Label IsVisible="True"  Grid.Column="2" Grid.Row="4" Text="{Binding OptionScore1ToDisplay}" Style="{StaticResource StandardLabelStyle}" FontSize="13.5" />
+            <Label IsVisible="{Binding IsVisibleScore2}" Grid.Column="3" Grid.Row="4" Text="{Binding OptionScore2ToDisplay}" Style="{StaticResource StandardLabelStyle}" FontSize="13.5"/>
+            <Label IsVisible="{Binding IsVisibleScore3}" Grid.Column="4" Grid.Row="4" Text="{Binding OptionScore3ToDisplay}" Style="{StaticResource StandardLabelStyle}" FontSize="13.5"/>
+            
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="DMapp.View.SessionSetupPage">
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            
+            <forms:AnimationView Grid.Row="0"
+                x:Name="animationView"
+                Animation="atom.json"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                TranslationY="40"                 
+                HeightRequest="1000"
+                WidthRequest="1000"
+                IsVisible="True"
+                AutoPlay="True"
+                Loop="True"              
+            />
+            <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TranslationY="-25">
+
+                <Entry VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding SessionTitle}" FontSize="15" Placeholder="The Title, for example: What phone should I buy?" WidthRequest="360" HorizontalTextAlignment="Center" MaxLength="38"/>
+                <Entry TranslationY="6" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Goal}" FontSize="15" Placeholder="The goal, for example: Buy the best possible phone."  WidthRequest="360" HorizontalTextAlignment="Center" MaxLength="60"/>
+                <Grid TranslationY="-3" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Picker SelectedItem="{Binding ChoosenCategoryName, Mode=TwoWay}" ItemsSource="{Binding SessionCategoriesList}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" WidthRequest="140" TranslationX="26" FontSize="13" HorizontalTextAlignment="Center"  />
+                    <Button Command="{Binding PlusButtonClickedCommand}" Grid.Row="1" Grid.Column="0" VerticalOptions="End" HorizontalOptions="Center" Text="+" Style="{StaticResource PlusButtonStyle}"   TranslationX="-6" />
+                    <Entry IsVisible="{Binding IsCategoryEntryVisible}" Grid.Column="1" Placeholder="category name" Text="{Binding NewCategoryName}" TranslationX="-25" WidthRequest="200" HorizontalTextAlignment="Center" MaxLength="15" FontSize="13" TranslationY="-5" />
+                    <Button Command="{Binding ContinueButtonClickedCommand}" IsVisible="{Binding IsContinueButtonVisible}" Grid.Column="1" Text="Continue" VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource ContinueButtonStyle}"   Grid.RowSpan="2" TranslationX="-25"/>
+                    <Button Command="{Binding CancelButtonClickedCommand}" IsVisible="{Binding IsCancelButtonVisible}" Grid.Row="1" Grid.Column="1" Text="Cancel" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="30" BackgroundColor="LightCoral" TextColor="White" TranslationX="-30" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

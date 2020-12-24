@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMapp.View.OptionsSetupPage"
+             x:Name="OSetupPage">
+    <ContentPage.Content>
+        
+            
+
+            <Grid>
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Placeholder="Option's name like: Audi" Text="{Binding OptionName}" HorizontalOptions="EndAndExpand" WidthRequest="300" HorizontalTextAlignment="Center" />
+                <Button Grid.Row="2" Command="{Binding PlusButtonClickedCommand}" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center" Text="+" CornerRadius="30" BackgroundColor="{Binding ButtonColor}" WidthRequest="40" HeightRequest="40" TextColor="White" TranslationX="0" />
+                <Button Grid.Row="1" Command="{Binding ContinueButtonClickedCommand}" Grid.Column="3"  Text="Continue" VerticalOptions="Center" HorizontalOptions="End"  CornerRadius="30" BackgroundColor="LightBlue" TextColor="White" TranslationX="0"/>
+            <Label Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding NumOfChoices}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+            <ListView x:Name="listview" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="0,20,0,0" Grid.Row="3" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding OptionsList}" Grid.Column="1" Grid.ColumnSpan="3" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Padding="7,8,0,8" Text="{Binding}" FontSize="16" HorizontalOptions="StartAndExpand" />
+                            <ViewCell.ContextActions >
+                                <MenuItem Text="Delete"
+                                          Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference Name=OSetupPage}}"
+                                          CommandParameter="{Binding}"
+                                          IsDestructive="True"/>
+
+                            </ViewCell.ContextActions>
+                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

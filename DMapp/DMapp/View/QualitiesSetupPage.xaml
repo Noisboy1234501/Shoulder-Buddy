@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMapp.View.QualitiesSetupPage"
+             x:Name="QSetupPage">
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+            <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Placeholder="Quality's name" Text="{Binding QualityName}" HorizontalOptions="EndAndExpand" WidthRequest="300" HorizontalTextAlignment="Center" />
+            <Button Grid.Row="2" BackgroundColor="{Binding ButtonColor}" Command="{Binding PlusButtonClickedCommand}" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center" Text="+"  TranslationX="0" Style="{StaticResource PlusButtonStyle}" />
+            <Button Grid.Row="1" Command="{Binding ContinueButtonClickedCommand}" Grid.Column="3"  Text="Continue" VerticalOptions="Center" HorizontalOptions="End"  TranslationX="0" Style="{StaticResource ContinueButtonStyle}"/>
+            <Label Grid.Column="3" Grid.ColumnSpan="2" Text="{Binding NumOfChoices}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+
+            <ListView SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="0,20,0,0" Grid.Row="3" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding QualitiesList}" Grid.Column="1" Grid.ColumnSpan="3" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell  >
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" 
+                                          Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference Name=QSetupPage}}"
+                                          CommandParameter="{Binding}"
+                                          IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                            
+                                <Label Padding="7,8,0,8" Text="{Binding}" FontSize="16" HorizontalOptions="StartAndExpand" />
+                            
+                            
+                            
+                        </ViewCell>
+
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

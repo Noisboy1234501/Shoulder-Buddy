@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:themes = "clr-namespace:DMapp.Themes;assembly=DMapp"
+             x:Class="DMapp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+            </ResourceDictionary.MergedDictionaries >
+            
+            <Style x:Key="ListViewStyle" TargetType="ListView">
+                <Setter Property="SeparatorColor" Value="DeepPink"/>
+                <Setter Property="SeparatorVisibility" Value="Default" />
+                <Setter Property="IsEnabled" Value="False"/>
+                <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+                <Setter Property="HorizontalScrollBarVisibility" Value="Never"/>
+            </Style>
+
+            <Style x:Key="TableBorder" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="CornerRadius" Value="0"/>
+                <Setter Property="BorderColor" Value="RosyBrown"/>
+                <Setter Property="Opacity" Value="0.4"/>
+            </Style>
+
+            <Style x:Key="MainColumnLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style x:Key="OptionsNameLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TranslationY" Value="5"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
+            <Style x:Key="StandardLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TextColor" Value="Black"/>
+                
+            </Style>
+
+            <Style x:Key="PlusButtonStyle" TargetType="Button">
+                <Setter Property="CornerRadius" Value="30"/>
+                <Setter Property="BackgroundColor" Value="LightGreen"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+            
+            <Style x:Key="ContinueButtonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="BackgroundColor" Value="LightBlue"/>
+                <Setter Property="CornerRadius" Value="30"/>
+            </Style>
+
+           
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DMapp.View.SessionSettingsPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.75*"/> <!--Column added to control distance from sliders to right side.-->
+            </Grid.ColumnDefinitions>
+
+            <Frame BackgroundColor="Transparent" BorderColor="Black" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <Label Grid.Row="2" Grid.Column="1" Text="{Binding AccuracyToDisplay}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <Label Grid.Row="2" Grid.Column="2" Text="{Binding TimeToDisplay}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+
+            <!--Switches-->
+            
+            <!--<Switch Grid.Column="1" Grid.Row="4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsToggled="{Binding StopWatchOn, Mode=TwoWay}" />-->
+            
+
+            
+            <!--<Label Grid.Row="4" Grid.Column="2" Text="Stopwatch" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>-->
+            
+
+            <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Style="{StaticResource ContinueButtonStyle}" Text="Continue" Command="{Binding ContinueButtonClickedCommand}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
