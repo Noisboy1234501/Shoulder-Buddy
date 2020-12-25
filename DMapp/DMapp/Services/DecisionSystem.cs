@@ -139,6 +139,7 @@ namespace DMapp.Services
         // Overload used for DetailedResultVM
         public static List<double> ReturnResult(List<double> qualitiesImportance, List<List<double>> optionWeights)
         {
+            if(qualitiesImportance.Count == 1) { qualitiesImportance[0] = 1; }
             List<double> scores = new List<double>();
             double score = 0;
             for(int i = 0; i< optionWeights.Count; i++)

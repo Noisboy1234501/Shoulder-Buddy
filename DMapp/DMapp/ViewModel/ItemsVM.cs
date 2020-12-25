@@ -69,7 +69,7 @@ namespace DMapp.ViewModel
             DeleteCommand = new Command<DecisionSession>((x) => ExecuteDeleteCommand(x));
             DetailsCommand = new Command<DecisionSession>((x) => ExecuteDetailsCommand(x));
           
-            BestScore = 15;
+            
 
         }
 
@@ -129,7 +129,7 @@ namespace DMapp.ViewModel
             InitializationCounter.numOfQualitiesChoicesVMInitialized = 0;
             InitializationCounter.numOfOptionsChoicesVMInitialized = 0;
             QualitiesChoiceSliderValuesHolder.oldSequence = null;
-            SelectedIndex = 0;
+            SelectedCategoryIndex = 0;
         }
     
 
@@ -158,7 +158,7 @@ namespace DMapp.ViewModel
                 //Mock_DB mockDB = new Mock_DB();
                 notes = ManagerSQL.ReadDecisionSessions().ToList();
 
-                string choosenCategory = CategoriesToDisplay[selectedIndex].CategoryName;
+                string choosenCategory = CategoriesToDisplay[selectedCategoryIndex].CategoryName;
 
                 if (choosenCategory != "All")
                 {
@@ -172,6 +172,14 @@ namespace DMapp.ViewModel
                 {
                     Decisions.Add(note);
                 }
+
+                if(Decisions.Count != 0)
+                {
+                    selectedSession = Decisions[0];
+                    PrepareChartData();
+                }
+
+                
             }
             catch (Exception ex)
             {
@@ -182,6 +190,65 @@ namespace DMapp.ViewModel
                 IsBusy = false;
             }
             
+        }
+
+        private void PrepareChartData()
+        {
+
+            var options = ManagerSQL.ReadOptions().Where(x => x.SessionID == selectedSession.SessionID).ToList();
+            var qualitiesImportance = ManagerSQL.ReadQualities().Where(x => x.SessionID == selectedSession.SessionID).Select(x => x.Importance).ToList();
+            var weights = ManagerSQL.ReadWeights().Where(x => x.SessionID == selectedSession.SessionID).Select(x => x.Amount).ToList();
+            List<List<double>> weightsToPass = new List<List<double>>();
+            int cycleCounter = 1;
+            int numOfQualities = qualitiesImportance.Count;
+            foreach(var option in options)
+            {
+                List<double> weightsForOneOption = new List<double>();
+                for(int i = (cycleCounter-1)*numOfQualities; i < numOfQualities*cycleCounter; i++)
+                {
+                    weightsForOneOption.Add(weights[i]);
+                   
+                }
+                cycleCounter++;
+                weightsToPass.Add(weightsForOneOption);
+               
+                
+            }
+
+            var optionsScore = DecisionSystem.ReturnResult(qualitiesImportance, weightsToPass).ToList();
+            int counter = 0;
+            var temp = new ObservableCollection<ChartDataModel>();
+            foreach (var option in options)
+            {
+                temp.Add(new ChartDataModel
+                {
+                     OptionTitle = option.Name,
+                    FinalScore = optionsScore[counter]
+                });
+                counter++;
+            }
+
+            double sumOfScore = 0;
+            foreach(var tempItem in temp) { sumOfScore += tempItem.FinalScore; }
+            foreach(var tempItem in temp)
+            {
+                tempItem.FinalScore /= sumOfScore;
+                tempItem.FinalScore *= 100;
+                tempItem.FinalScore = Math.Round(tempItem.FinalScore, 1);
+                tempItem.FinalScoreString = tempItem.FinalScore.ToString();
+                
+            }
+
+            double tester = 0;
+            string tempbest = "";
+            //Find best option
+            foreach(var item in temp)
+            {
+                if(item.FinalScore > tester) { tester = item.FinalScore; tempbest = item.OptionTitle; }
+            }
+
+            BestOption = tempbest;
+            ChartData = temp;
         }
 
         private async Task ExecuteNewDecisionCommand()
@@ -202,14 +269,25 @@ namespace DMapp.ViewModel
         #region bindable properties
 
 
-        private double bestScore;
+        private string bestOption;
 
-        public double BestScore
+        public string BestOption
         {
-            get { return bestScore; }
-            set { bestScore = value; }
+            get { return bestOption; }
+            set { bestOption = value;
+                OnPropertyChanged();
+            }
         }
 
+        private ObservableCollection<ChartDataModel> chartData;
+
+        public ObservableCollection<ChartDataModel> ChartData
+        {
+            get { return chartData; }
+            set { chartData = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         private ObservableCollection<SessionCategory> categoriesToDisplay;
@@ -230,76 +308,57 @@ namespace DMapp.ViewModel
             get { return selectedSession; }
             set
             {
-                selectedSession = value;
+                if(value != null)
+                {
+                    selectedSession = value;
 
-                //if (selectedSession != null)
-                //{
-                //    CallLoadDecisionSessionCommand(); //in the future add specific page which exist and we want to edit it.
-                //}
+                    int numOfDecisions = Decisions.Count();
+                    for (int i = 0; i < numOfDecisions; i++) { if(Decisions[i] == value) { SelectedIndex = i; } }
 
-
-                OnPropertyChanged();
+                    PrepareChartData();
+                    OnPropertyChanged();
+                }
+                
 
             }
         }
 
-        private int selectedIndex;
+        private int selectedCategoryIndex;
 
-        public int SelectedIndex
+        public int SelectedCategoryIndex
         {
-            get { return selectedIndex; }
-            set { selectedIndex = value;
+            get { return selectedCategoryIndex; }
+            set { selectedCategoryIndex = value;
                 CallLoadDecisionsCommand();
                 OnPropertyChanged();
             }
         }
 
+        private int selectedIndex;
 
-
-
-
-
-
-        
-
-      
-
-        #endregion
-
-
-        #region Methods
-
-
-       
-
-        /// <summary>
-        /// Method for update the chart data.
-        /// </summary>
-        //private void UpdateChartData()
-        //{
-        //    ChartData.Clear();
-        //    TotalBalance = 0;
-
-        //    var incomeCollection = ListItems.Where(item => item.IsCredited).ToList();
-        //    var expenseCollection = ListItems.Where(item => !item.IsCredited).ToList();
-
-        //    for (int i = 0; i < incomeCollection.Count; i++)
-        //    {
-        //        TotalBalance += incomeCollection[i].Amount;
-        //        TotalBalance -= expenseCollection[i].Amount;
-        //        ChartData.Add(new TransactionChartData(xValues[i], incomeCollection[i].Amount, expenseCollection[i].Amount, 4));
-        //    }
-        //}
-
-        /// <summary>
-        /// Invoked when an item is selected from the my wallet page.
-        /// </summary>
-        /// <param name="selectedItem">Selected item from the list view.</param>
-        private void NavigateToNextPage(object selectedItem)
+        public int SelectedIndex //index selected in decision list, used for chart explode
         {
-            // Do something
+            get { return selectedIndex; }
+            set { selectedIndex = value;
+                OnPropertyChanged();
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
         #endregion
+
+
+
 
 
     }

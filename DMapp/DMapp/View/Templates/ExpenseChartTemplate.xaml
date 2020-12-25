@@ -22,7 +22,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
         <gradient:SfGradientView Grid.RowSpan="4">
@@ -48,7 +48,7 @@
         <!-- Total balance -->
         <Label Grid.Row="1"
                Margin="16,16,16,4" 
-               Text="Best Score"
+               Text="Best Score:"
                TextColor="{DynamicResource Gray-White}"
                FontSize="12"
                FontFamily="{DynamicResource Montserrat-Medium}"
@@ -62,7 +62,7 @@
                LineHeight="{OnPlatform Android=1.5, Default=-1}">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="{Binding BestScore}" />
+                    <Span Text="{Binding BestOption}" FontSize="12" FontAttributes="Bold"/>
                 </FormattedString>
             </Label.FormattedText>
         </Label>
@@ -78,7 +78,7 @@
             
             <combobox:SfComboBox 
                  
-                                 SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                                 SelectedIndex="{Binding SelectedCategoryIndex, Mode=TwoWay}"
                                  ShowBorder="False" MultiSelectMode="None" IsEditableMode="False"
                                  TextColor="{DynamicResource Gray-White}" HorizontalOptions="Start" TextSize="14"
                                  VerticalOptions="Start" FontFamily="{DynamicResource Montserrat-Medium}"
@@ -99,9 +99,47 @@
         </StackLayout>
 
 
-        <!--<StackLayout VerticalOptions="Start" HorizontalOptions="Start" Padding="30">
-            <combobox:SfComboBox HeightRequest="40" x:Name="comboBox" DataSource="{Binding EmployeeCollection}" Text="change" />
-        </StackLayout>-->
+       
+
+
+        <StackLayout Grid.Row="3"  TranslationY="-30">
+            <chart:SfChart x:Name="Chart"  Margin="10,0,10,26" HeightRequest="250" WidthRequest="250" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource Transparent}">
+                
+
+                <chart:SfChart.Legend>
+                    <chart:ChartLegend IconHeight="14" IconWidth="14" OverflowMode="Wrap" DockPosition="Bottom">
+
+                        <chart:ChartLegend.LabelStyle>
+
+                            <chart:ChartLegendLabelStyle TextColor="White" Margin="5" FontSize="11"/>
+
+                        </chart:ChartLegend.LabelStyle>
+                        
+                    </chart:ChartLegend>
+                    
+                </chart:SfChart.Legend>
+                <chart:SfChart.Series>
+                    <chart:DoughnutSeries  ExplodeIndex="{Binding SelectedIndex}" x:Name="doughnutSeries" ItemsSource="{Binding ChartData}" XBindingPath="OptionTitle" YBindingPath="FinalScoreString" LegendIcon="Circle" EnableAnimation="true" StrokeWidth="1" StrokeColor="White" ExplodeOnTouch="true" EnableDataPointSelection="true">
+                        <chart:DoughnutSeries.DataMarker>
+                            
+                            <chart:ChartDataMarker ShowLabel="True">
+                                
+                            </chart:ChartDataMarker>
+                            
+                        </chart:DoughnutSeries.DataMarker>
+                        <chart:DoughnutSeries.ColorModel>
+                            <chart:ChartColorModel Palette="Natural" />
+                        </chart:DoughnutSeries.ColorModel>
+                        <chart:DoughnutSeries.CenterView>
+                            <StackLayout x:Name="stack" Orientation ="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="{Binding BindingContext.OptionTitle}" TextColor="Black" FontAttributes="Bold" FontSize="12" FontFamily="Helvetica"  HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding BindingContext.FinalScoreString}" TextColor="Black" FontAttributes="Bold" FontSize="12" FontFamily="Helvetica"  HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </chart:DoughnutSeries.CenterView>
+                    </chart:DoughnutSeries>
+                </chart:SfChart.Series>
+            </chart:SfChart>
+        </StackLayout>
 
 
 

@@ -16,7 +16,7 @@ namespace DMapp
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzcxMjI4QDMxMzgyZTM0MmUzMFloRTZySVdtL2x0eUVHVGNRT0lteU1Pc3lwQXVJUk13Yk85VHlQWGxTQnc9");
             InitializeComponent();
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new ItemsPage());
         }
 
 
@@ -24,8 +24,8 @@ namespace DMapp
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzcxMjI4QDMxMzgyZTM0MmUzMFloRTZySVdtL2x0eUVHVGNRT0lteU1Pc3lwQXVJUk13Yk85VHlQWGxTQnc9");
             InitializeComponent();
-            MainPage = new MainPage();
-           
+            MainPage = new NavigationPage(new ItemsPage());
+
             DataBase = DataBaseLocation;
         }
 
