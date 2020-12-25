@@ -108,7 +108,7 @@ namespace DMapp.Services
                 Int32.TryParse(elements[0], out leftQualityIndex);
                 Int32.TryParse(elements[1], out rightQualityIndex);
                 qualitiesScores[leftQualityIndex] += leftSideValues[counter];
-                qualitiesScores[rightQualityIndex] += 1 - leftSideValues[counter]; 
+                qualitiesScores[rightQualityIndex] += 1 - leftSideValues[counter] ; 
                 counter++;
             }
             return qualitiesScores;

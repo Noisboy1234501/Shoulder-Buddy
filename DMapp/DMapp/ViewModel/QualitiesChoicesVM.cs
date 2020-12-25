@@ -422,10 +422,11 @@ namespace DMapp.ViewModel
             LoadLatestSliderValues();
         }
 
-        private void SafeSliderValue(int numOfSlider, double leftValue)
+        private void SafeSliderValue(int numOfSlider, double rightValue)
         {
             //switch - we need to know from which slider we got a value and in which índex to decide what is the index of the choice
             int choiceIndex = 0;
+            double leftValue = 1 - rightValue;
 
             switch(numOfSlider)
             {

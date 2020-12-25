@@ -48,7 +48,7 @@
         <!-- Total balance -->
         <Label Grid.Row="1"
                Margin="16,16,16,4" 
-               Text="Best Score:"
+               Text="Best Option:"
                TextColor="{DynamicResource Gray-White}"
                FontSize="12"
                FontFamily="{DynamicResource Montserrat-Medium}"

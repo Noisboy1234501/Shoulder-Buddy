@@ -10,7 +10,7 @@
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             
-            <forms:AnimationView Grid.Row="0"
+            <!--<forms:AnimationView Grid.Row="0"
                 x:Name="animationView"
                 Animation="atom.json"
                 VerticalOptions="EndAndExpand"
@@ -21,7 +21,7 @@
                 IsVisible="True"
                 AutoPlay="True"
                 Loop="True"              
-            />
+            />-->
             <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TranslationY="-25">
 
                 <Entry VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding SessionTitle}" FontSize="15" Placeholder="The Title, for example: What phone should I buy?" WidthRequest="360" HorizontalTextAlignment="Center" MaxLength="38"/>
