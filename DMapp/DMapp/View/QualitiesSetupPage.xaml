@@ -6,6 +6,12 @@
     
     <ContentPage.Content>
         <Grid>
+
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding ContinueButtonClickedCommand}"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand}"/>
+            </Grid.GestureRecognizers>
+            
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>

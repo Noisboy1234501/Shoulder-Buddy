@@ -18,6 +18,7 @@ namespace DMapp.ViewModel
         //Mock_DB mock_DB;
         public double SliderStep;
         public Command EndCommand { get; set; }
+       
         public Command LeftButtonClickedCommand { get; set; }
         public Command RightButtonClickedCommand { get; set; }
         private int Mode;
@@ -40,6 +41,7 @@ namespace DMapp.ViewModel
             EndCommand = new Command(async () => await ExecuteEndCommand());
             LeftButtonClickedCommand = new Command(async () => await ExecuteLeftButtonClickedCommand());
             RightButtonClickedCommand = new Command(async () => await ExecuteRightButtonClickedCommand());
+           
             //mock_DB = new Mock_DB();
             navigation = nav;
             sessionID = passedSessionID;  // ID of Desision session 
@@ -52,6 +54,8 @@ namespace DMapp.ViewModel
             weightsToDisplayColumn3 = new ObservableCollection<double>();
             Mode = mode;
         }
+
+       
 
         // Readjusted the value so slider moves only by determined value (step by step)
         private double ReadjustSliderValue(double passedValue)

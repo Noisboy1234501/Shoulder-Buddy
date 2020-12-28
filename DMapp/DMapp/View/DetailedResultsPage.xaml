@@ -9,6 +9,11 @@
         
         <Grid Padding="0" ColumnSpacing="0" RowSpacing="0">
 
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand}"/>
+                
+            </Grid.GestureRecognizers>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="25" />
                 <RowDefinition Height="25" />

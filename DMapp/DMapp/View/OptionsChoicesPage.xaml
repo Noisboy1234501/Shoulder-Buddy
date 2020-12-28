@@ -4,6 +4,11 @@
              x:Class="DMapp.View.OptionsChoicesPage">
     <ContentPage.Content>
         <Grid>
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding ContinueButtonClickedCommand}"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding BackButtonClickedCommand}"/>
+            </Grid.GestureRecognizers>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
 

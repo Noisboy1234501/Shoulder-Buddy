@@ -18,6 +18,7 @@ namespace DMapp.ViewModel
         public Command PlusButtonClickedCommand { get; set; }
         public Command CancelButtonClickedCommand { get; set; }
         public Command ContinueButtonClickedCommand { get; set; }
+        public Command BackCommand { get; set; }
         INavigation navigation;
         public SessionSetupVM(INavigation navi)
         {
@@ -33,6 +34,7 @@ namespace DMapp.ViewModel
             PlusButtonClickedCommand = new Command(async () => await ExecutePlusButtonClickedCommand());
             CancelButtonClickedCommand = new Command(async () => await ExecuteCancelButtonClickedCommand());
             ContinueButtonClickedCommand = new Command(async () => await ExecuteContinueButtonClickedCommand());
+            BackCommand = new Command(async () => await ExecuteBackCommand());
             InitializationCounter.numOfQualitiesChoicesVMInitialized = InitializationCounter.numOfOptionsChoicesVMInitialized =
                 InitializationCounter.numOfSessionSettingsVMInitialized = 0;  // we create decision session for the first time
             // so we are making sure that it will have set  default values on pages.
@@ -40,7 +42,10 @@ namespace DMapp.ViewModel
             
         }
 
-       
+        private async Task ExecuteBackCommand()
+        {
+            await navigation.PopAsync();
+        }
 
         private void LoadSessionCategories()
         {
@@ -56,7 +61,7 @@ namespace DMapp.ViewModel
 
         #region Commands
 
-        private async Task ExecuteContinueButtonClickedCommand()
+        private async Task ExecuteContinueButtonClickedCommand() 
         {
             try
             {

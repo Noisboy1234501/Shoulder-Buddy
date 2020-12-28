@@ -251,7 +251,7 @@ namespace DMapp.ViewModel
             ChartData = temp;
         }
 
-        private async Task ExecuteNewDecisionCommand()
+        private async Task ExecuteNewDecisionCommand() 
         {
             TemporaryDb.CleanAllData();
             CurrentIndexHolder.QualitiesCurrentIndex = 1;

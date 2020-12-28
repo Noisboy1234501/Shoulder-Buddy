@@ -4,6 +4,12 @@
              x:Class="DMapp.View.SessionSettingsPage">
     <ContentPage.Content>
         <Grid>
+
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding ContinueButtonClickedCommand}"/>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand }" />
+            </Grid.GestureRecognizers>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="3*"/>

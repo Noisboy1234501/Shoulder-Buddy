@@ -103,7 +103,7 @@
 
 
         <StackLayout Grid.Row="3"  TranslationY="-30">
-            <chart:SfChart x:Name="Chart"  Margin="10,0,10,26" HeightRequest="250" WidthRequest="250" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource Transparent}">
+            <chart:SfChart x:Name="Chart"  Margin="10,0,10,26" HeightRequest="290" WidthRequest="290" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource Transparent}">
                 
 
                 <chart:SfChart.Legend>

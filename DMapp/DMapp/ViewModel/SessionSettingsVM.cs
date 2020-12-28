@@ -14,9 +14,11 @@ namespace DMapp.ViewModel
         INavigation navigation;
         
         public Command ContinueButtonClickedCommand { get; set; }
+        public Command BackCommand { get; set; }
         public SessionSettingsVM(INavigation navi)
         {
             ContinueButtonClickedCommand = new Command(async () => await ExecuteContinueButtonClickedCommand());
+            BackCommand = new Command(async () => await ExecuteBackCommand());
             navigation = navi;
             if(InitializationCounter.numOfSessionSettingsVMInitialized == 0)
             {
@@ -26,6 +28,12 @@ namespace DMapp.ViewModel
             StopWatchOn = false; // In future version count time
 
         }
+
+        private async Task ExecuteBackCommand()
+        {
+            await navigation.PopAsync();
+        }
+
         private async Task ExecuteContinueButtonClickedCommand()
         {
             await navigation.PushAsync(new QualitiesChoicesPage(navigation));

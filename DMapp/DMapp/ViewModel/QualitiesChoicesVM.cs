@@ -21,11 +21,15 @@ namespace DMapp.ViewModel
         
         public Command ContinueButtonClickedCommand { get; set; }
         public Command BackButtonClickedCommand { get; set; }
+        public Command BackCommand { get; set; }
+        public Command ContinueCommand { get; set; }
 
         public QualitiesChoicesVM(INavigation navi)
         {
             ContinueButtonClickedCommand = new Command(async () => await ExecuteContinueButtonClickedCommand());
-            BackButtonClickedCommand = new Command( () => ExecuteBackButtonClickedCommand());
+            ContinueCommand = new Command(async () => await ExecuteContinueCommand());
+            BackButtonClickedCommand = new Command( async () => await ExecuteBackButtonClickedCommand());
+            BackCommand = new Command(async () => await ExecuteBackCommand());
             navigation = navi;
             if(InitializationCounter.numOfQualitiesChoicesVMInitialized == 0)
             {
@@ -36,11 +40,24 @@ namespace DMapp.ViewModel
 
         }
 
+        private async Task ExecuteContinueCommand()
+        {
+            await navigation.PushAsync(new OptionsChoicesPage(navigation));
+        }
+
+        private async Task ExecuteBackCommand()
+        {
+            await navigation.PopAsync();
+        }
+
+
+
         #region Commands
-        private void ExecuteBackButtonClickedCommand()
+        private async Task ExecuteBackButtonClickedCommand()
         {
             int currentIndex = CurrentIndexHolder.QualitiesCurrentIndex;
             if (currentIndex != 1) { CurrentIndexHolder.QualitiesCurrentIndex--; UpdateIndexes(); }
+            else { await navigation.PopAsync(); }
             
         }
 
@@ -358,7 +375,12 @@ namespace DMapp.ViewModel
 
         private void SaveResultsToTemporaryDb()
         {
-            double[] qualitiesImportance = DecisionSystem.CalculateQualitiesScores(Sequence, QualitiesChoiceSliderValuesHolder.SliderValues, QualitiesNames.Count);
+            var reversedOrder = QualitiesChoiceSliderValuesHolder.SliderValues;
+            for(int i = 0; i < reversedOrder.Count(); i++)
+            {
+                reversedOrder[i] = 1 - reversedOrder[i];
+            }
+            double[] qualitiesImportance = DecisionSystem.CalculateQualitiesScores(Sequence, reversedOrder, QualitiesNames.Count);
             TemporaryDb.qualitiesImportance = qualitiesImportance.ToList();
             //var resultsCheck = TemporaryDb.qualitiesImportance;
         }
@@ -426,7 +448,7 @@ namespace DMapp.ViewModel
         {
             //switch - we need to know from which slider we got a value and in which índex to decide what is the index of the choice
             int choiceIndex = 0;
-            double leftValue = 1 - rightValue;
+            
 
             switch(numOfSlider)
             {
@@ -451,9 +473,9 @@ namespace DMapp.ViewModel
             }
             int indexMultiplier = CurrentIndexHolder.QualitiesCurrentIndex - 1;
             choiceIndex += indexMultiplier * 6;
-            QualitiesChoiceSliderValuesHolder.SliderValues[choiceIndex - 1] = leftValue;
+            QualitiesChoiceSliderValuesHolder.SliderValues[choiceIndex - 1] = rightValue;
         }
-        private void LoadLatestSliderValues()
+        public void LoadLatestSliderValues()
         {
             
             int currentIndex = CurrentIndexHolder.QualitiesCurrentIndex;
@@ -463,37 +485,37 @@ namespace DMapp.ViewModel
             switch (NumOfVisibleChoices)
             {
                 case 1:
-                    SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
+                    SliderValue1 =   QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
                     break;
                 case 2:
                     SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
-                    SliderValue2 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
+                    SliderValue2 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
                     break;
                 case 3:
-                    SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
+                    SliderValue1 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
                     SliderValue2 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
                     SliderValue3 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
                     break;
                 case 4:
                     SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
                     SliderValue2 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
-                    SliderValue3 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
-                    SliderValue4 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 4];
+                    SliderValue3 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
+                    SliderValue4 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 4];
                     break;
                 case 5:
-                    SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
+                    SliderValue1 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
                     SliderValue2 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
-                    SliderValue3 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
+                    SliderValue3 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
                     SliderValue4 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 4];
-                    SliderValue5 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 5];
+                    SliderValue5 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 5];
                     break;
                 case 6:
-                    SliderValue1 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
-                    SliderValue2 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
-                    SliderValue3 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
-                    SliderValue4 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 4];
-                    SliderValue5 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 5];
-                    SliderValue6 = QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 6];
+                    SliderValue1 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 1];
+                    SliderValue2 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 2];
+                    SliderValue3 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 3];
+                    SliderValue4 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 4];
+                    SliderValue5 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 5];
+                    SliderValue6 =  QualitiesChoiceSliderValuesHolder.SliderValues[startingIndex + 6];
                     break;
             }
             

@@ -4,6 +4,10 @@
              x:Class="DMapp.View.GeneralResultsPage">
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand}"/>
+                <SwipeGestureRecognizer Direction="Left" Command="{Binding DetailsCommand}"/>
+            </StackLayout.GestureRecognizers>
             <Button Text="End" Command="{Binding EndCommand}" WidthRequest="100" HeightRequest="100" />
             <Button Text="Details" Command="{Binding DetailsCommand}" WidthRequest="100" HeightRequest="100" />
         </StackLayout>

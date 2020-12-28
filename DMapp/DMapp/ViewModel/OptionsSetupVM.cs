@@ -13,6 +13,8 @@ namespace DMapp.ViewModel
         public Command PlusButtonClickedCommand { get; set; }
         public Command ContinueButtonClickedCommand { get; set; }
         public Command DeleteCommand { get; set; }
+        public Command BackCommand { get; set; }
+        public Command ContinueCommand { get; set; }
         INavigation navigation;
         private bool isUpdating;
         private string previousName;
@@ -23,8 +25,20 @@ namespace DMapp.ViewModel
             PlusButtonClickedCommand = new Command(async () => await ExecutePlusButtonClickedCommand());
             ContinueButtonClickedCommand = new Command(async () => await ExecuteContinueButtonClickedCommand());
             DeleteCommand = new Command<string>((x) => ExecuteDeleteCommand(x));
+            BackCommand = new Command(async () => await ExecuteBackCommand());
+            ContinueCommand = new Command(async () => await ExecuteContinueCommand());
             navigation = navi;
             ButtonColor = "LightGreen";
+        }
+
+        private async Task ExecuteContinueCommand()
+        {
+            await navigation.PushAsync(new SessionSettingsPage(navigation));
+        }
+
+        private async Task ExecuteBackCommand()
+        {
+            await navigation.PopAsync();
         }
 
         private void ExecuteDeleteCommand(string name)

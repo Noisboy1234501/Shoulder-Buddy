@@ -45,6 +45,6 @@ namespace DMapp.View
             itemList.SelectedItem = null;
         }
 
-        
+       
     }
 }

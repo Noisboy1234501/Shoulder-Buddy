@@ -9,6 +9,7 @@
              xmlns:converter="clr-namespace:DMapp.Converters"
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:template="clr-namespace:DMapp.View.Templates"
+            
              xmlns:viewModel="clr-namespace:DMapp.ViewModel"
              
              x:Class="DMapp.View.ItemsPage"
@@ -30,8 +31,12 @@
         <ToolbarItem Text="New Decision" Command="{Binding NewDecisionCommand}"/>
     </ContentPage.ToolbarItems>
 
+
+
     <ContentPage.Content>
-        <ScrollView>
+     
+    <ScrollView>
+           
             <Grid RowSpacing="0" ColumnSpacing="0">
 
                 <Grid.RowDefinitions>

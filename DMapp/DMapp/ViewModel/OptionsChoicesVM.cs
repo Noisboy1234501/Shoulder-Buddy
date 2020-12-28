@@ -15,7 +15,10 @@ namespace DMapp.ViewModel
         INavigation navigation;
         int maxIndex;
         public Command ContinueButtonClickedCommand { get; set; }
+        public Command ContinueCommand { get; set; }
         public Command BackButtonClickedCommand { get; set; }
+        
+
         private List<string> QualitiesNames;
         private List<string> OptionNames;
 
@@ -29,7 +32,9 @@ namespace DMapp.ViewModel
         {
             navigation = navi;
             ContinueButtonClickedCommand = new Command(async () => await ExecuteContinueButtonClickedCommand());
-            BackButtonClickedCommand = new Command(() => ExecuteBackButtonClickedCommand());
+            BackButtonClickedCommand = new Command(async () => await ExecuteBackButtonClickedCommand());
+            
+            ContinueCommand = new Command(async () => await ExecuteContinueCommand());
             if (InitializationCounter.numOfOptionsChoicesVMInitialized == 0) // when continue clicked, set default once more.
             {
                 
@@ -39,6 +44,13 @@ namespace DMapp.ViewModel
             
 
         }
+
+        private async Task ExecuteContinueCommand()
+        {
+            await navigation.PushAsync(new GeneralResultsPage(navigation, 0, TemporaryDb.SessionID));
+        }
+
+        
 
         #region Methods
 
@@ -461,11 +473,12 @@ namespace DMapp.ViewModel
         #endregion
 
         #region Commands
-        private void ExecuteBackButtonClickedCommand()
+        private async Task ExecuteBackButtonClickedCommand()
         {
 
             int currentIndex = CurrentIndexHolder.OptionsCurrentIndex;
             if (currentIndex != 1) { CurrentIndexHolder.OptionsCurrentIndex--; UpdateIndexes(); LoadSliderValues(); }
+            else { await navigation.PopAsync(); }
         }
 
         private async Task ExecuteContinueButtonClickedCommand()
