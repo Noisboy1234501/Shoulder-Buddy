@@ -38,7 +38,7 @@ namespace DMapp.ViewModel
             DeleteCommand = new Command<string>((x) => ExecuteDeleteCommand(x));
             
 
-            ButtonColor = "LightGreen";
+            ButtonColor = "White";
         }
 
         private async Task ExecuteBackCommand()
@@ -111,14 +111,14 @@ namespace DMapp.ViewModel
                             {
                                 if (qualitiesList[i] == previousName) { qualitiesList[i] = qualityName; TemporaryDb.qualityNames[i] = qualityName; }
                             }
-                            ButtonColor = "LightGreen";
+                            ButtonColor = "White";
                             QualityName = "";
                             isUpdating = false;
                             SelectedItem = null;
                         }
                         else
                         {
-                            
+                            ButtonColor = "White";
                             QualityName = "";
                             isUpdating = false;
                             SelectedItem = null;
@@ -167,6 +167,24 @@ namespace DMapp.ViewModel
             }
         }
 
+        private string selectedItemTemp;
+
+        public string SelectedItemTemp
+        {
+            get { return selectedItemTemp; }
+            set { selectedItemTemp = value;
+                if ( !String.IsNullOrEmpty(value) ) 
+                {
+                    SelectedItem = value;
+                    ButtonColor = "Black";
+                    SelectedItemTemp = null;
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
+
         private string selectedItem;
 
         public string SelectedItem
@@ -180,9 +198,9 @@ namespace DMapp.ViewModel
                     previousName = value;
                      QualityName = value;
                     isUpdating = true;
-                    ButtonColor = "DodgerBlue";
+                    ButtonColor = "Black";
                 }
-                else { ButtonColor = "LightGreen"; }
+               
 
                 OnPropertyChanged();
             }
