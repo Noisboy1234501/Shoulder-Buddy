@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              x:Class="DMapp.View.SessionSettingsPage">
     <ContentPage.Content>
         <Grid>
@@ -27,7 +28,25 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.75*"/> <!--Column added to control distance from sliders to right side.-->
             </Grid.ColumnDefinitions>
+            
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source= "DashboardStyles.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
 
+            <gradient:SfGradientView Grid.RowSpan="8" Grid.ColumnSpan="5">
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush >
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="{DynamicResource Liliac}" Offset="0.0" />
+                            <gradient:SfGradientStop Color="{DynamicResource Purpleish-Blue}" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
             <Frame BackgroundColor="Transparent" BorderColor="Black" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
             <Label Grid.Row="2" Grid.Column="1" Text="{Binding AccuracyToDisplay}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
             <Label Grid.Row="2" Grid.Column="2" Text="{Binding TimeToDisplay}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>

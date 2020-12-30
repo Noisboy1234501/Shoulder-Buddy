@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DMapp.Services
 {
@@ -108,12 +109,13 @@ namespace DMapp.Services
             {
                 ManagerSQL.InsertWeight(weight);
             }
-            //var check1 = ManagerSQL.ReadDecisionSessions();
-            //var check2 = ManagerSQL.ReadOptions();
-            //var check3 = ManagerSQL.ReadQualities();
-            //var check4 = ManagerSQL.ReadSessionCategories();
-            //var check5 = ManagerSQL.ReadWeights();
-                        
+
+            var check1 = ManagerSQL.ReadDecisionSessions();
+            var check2 = ManagerSQL.ReadOptions();
+            var check3 = ManagerSQL.ReadQualities();
+            var check4 = ManagerSQL.ReadSessionCategories();
+            var check5 = ManagerSQL.ReadWeights();
+
         }
 
         private static void CreateWeights()
@@ -142,6 +144,15 @@ namespace DMapp.Services
 
         private static void CreateQualities()
         {
+            // reverse to store left value - detail use it
+
+            var reversedOrder = qualitiesImportance;
+            for (int i = 0; i < reversedOrder.Count; i++)
+            {
+                reversedOrder[i] = 1 - reversedOrder[i];
+            }
+
+            qualitiesImportance = reversedOrder;
             // for now we do not need qualities ID
             int importanceIndex = 0;
             foreach(string name in qualityNames)
@@ -183,9 +194,9 @@ namespace DMapp.Services
 
         public static void FindSessionID()
         {
-            var allsessions = ManagerSQL.ReadDecisionSessions();
-            int numOfAllSessions = allsessions.Count;
-            SessionID = numOfAllSessions + 1;
+            var sessions = ManagerSQL.ReadDecisionSessions();
+            int lastSessíon = sessions[sessions.Count - 1].SessionID;
+            SessionID = lastSessíon + 1;
         }
 
         private static void CreateDecisionSession()

@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DMapp.Services
 {
@@ -75,7 +76,7 @@ namespace DMapp.Services
 
 
 
-        public static void InsertWeight(Weight weight)
+        public static void  InsertWeight(Weight weight)
         {
             using (SQLiteConnection sqlConnection = new SQLiteConnection(App.DataBase))
             {

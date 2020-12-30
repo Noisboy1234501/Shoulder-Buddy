@@ -10,49 +10,38 @@
              x:Class="DMapp.View.SessionSetupPage">
     <ContentPage.Content>
 
-        <Grid>
+        <Grid >
             <Grid.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Left" Command="{Binding ContinueButtonClickedCommand}"/>
                 <SwipeGestureRecognizer Direction="Right" Command="{Binding BackCommand}"/>
             </Grid.GestureRecognizers>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2.5*"/>
-                <RowDefinition Height="3*"/>
+            
+            <Grid.RowDefinitions >
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.05*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            
-            <!--<forms:AnimationView Grid.Row="0"
-                x:Name="animationView"
-                Animation="atom.json"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="CenterAndExpand"
-                TranslationY="40"                 
-                HeightRequest="1000"
-                WidthRequest="1000"
-                IsVisible="True"
-                AutoPlay="True"
-                Loop="True"              
-            />-->
 
-            <!--<gradient:SfGradientView Grid.RowSpan="4">
-                <gradient:SfGradientView.BackgroundBrush>
-                    <gradient:SfLinearGradientBrush>
-                        <gradient:SfLinearGradientBrush.GradientStops>
-                            <gradient:SfGradientStop Color="{DynamicResource Liliac}" Offset="0.0" />
-                            <gradient:SfGradientStop Color="{DynamicResource Purpleish-Blue}" Offset="1.0" />
-                        </gradient:SfLinearGradientBrush.GradientStops>
-                    </gradient:SfLinearGradientBrush>
-                </gradient:SfGradientView.BackgroundBrush>
-            </gradient:SfGradientView>-->
-            
-             <Grid.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source= "DashboardStyles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Grid.Resources>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
 
-            <gradient:SfGradientView Grid.RowSpan="2">
+            <gradient:SfGradientView Grid.RowSpan="7" Grid.ColumnSpan="4">
                 <gradient:SfGradientView.BackgroundBrush>
                     <gradient:SfLinearGradientBrush >
                         <gradient:SfLinearGradientBrush.GradientStops>
@@ -64,26 +53,24 @@
             </gradient:SfGradientView>
 
 
-            <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TranslationY="-25">
 
-                <Entry VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding SessionTitle}" FontSize="15" Placeholder="The Title, for example: What phone should I buy?" WidthRequest="360" HorizontalTextAlignment="Center" MaxLength="38"/>
-                <Entry TranslationY="6" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Text="{Binding Goal}" FontSize="15" Placeholder="The goal, for example: Buy the best possible phone."  WidthRequest="360" HorizontalTextAlignment="Center" MaxLength="60"/>
-                <Grid TranslationY="-3" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Picker SelectedItem="{Binding ChoosenCategoryName, Mode=TwoWay}" ItemsSource="{Binding SessionCategoriesList}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" WidthRequest="140" TranslationX="26" FontSize="13" HorizontalTextAlignment="Center"  />
-                    <Button Command="{Binding PlusButtonClickedCommand}" Grid.Row="1" Grid.Column="0" VerticalOptions="End" HorizontalOptions="Center" Text="+" Style="{StaticResource PlusButtonStyle}"   TranslationX="-6" />
-                    <Entry IsVisible="{Binding IsCategoryEntryVisible}" Grid.Column="1" Placeholder="category name" Text="{Binding NewCategoryName}" TranslationX="-25" WidthRequest="200" HorizontalTextAlignment="Center" MaxLength="15" FontSize="13" TranslationY="-5" />
-                    <Button Command="{Binding ContinueButtonClickedCommand}" IsVisible="{Binding IsContinueButtonVisible}" Grid.Column="1" Text="Continue" VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource ContinueButtonStyle}"   Grid.RowSpan="2" TranslationX="-25"/>
-                    <Button Command="{Binding CancelButtonClickedCommand}" IsVisible="{Binding IsCancelButtonVisible}" Grid.Row="1" Grid.Column="1" Text="Cancel" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="30" BackgroundColor="LightCoral" TextColor="White" TranslationX="-30" />
-                </Grid>
-            </StackLayout>
+            <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="{Binding SessionTitle}" FontSize="35" Placeholder="Title"  HorizontalTextAlignment="Center" MaxLength="38" TextColor="White" />
+            <Entry  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Text="{Binding Goal}" FontSize="35" Placeholder="Goal/Assumption"   HorizontalTextAlignment="Center" MaxLength="38" TextColor="White"/>
+
+            <Picker Grid.Column="1" Grid.Row="3" SelectedItem="{Binding ChoosenCategoryName, Mode=TwoWay}" ItemsSource="{Binding SessionCategoriesList}" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand"   FontSize="18" HorizontalTextAlignment="Center" TextColor="White"  />
+            <Button  Grid.Column="1" Grid.Row="3" Command="{Binding PlusButtonClickedCommand}" FontSize="19" HeightRequest="41" CornerRadius="0"  VerticalOptions="End" HorizontalOptions="EndAndExpand" Text="+" Style="{StaticResource PlusButtonStyle}" BackgroundColor="Transparent" TranslationY="7" />
+                    
+                    <Entry Grid.Row="3" IsVisible="{Binding IsCategoryEntryVisible}" Grid.Column="2" Placeholder="category's name"  Text="{Binding NewCategoryName}"   HorizontalTextAlignment="Center"  FontSize="18"  HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" TextColor="White"/>
+                    <!--<Button Command="{Binding ContinueButtonClickedCommand}" IsVisible="{Binding IsContinueButtonVisible}" Grid.Column="1" Text="Continue" VerticalOptions="Center" HorizontalOptions="Center" Style="{StaticResource ContinueButtonStyle}"   Grid.RowSpan="2" />-->
+                    <Button Command="{Binding CancelButtonClickedCommand}" IsVisible="{Binding IsCancelButtonVisible}" Grid.Row="3" Grid.Column="2" Text="Cancel" VerticalOptions="End" HorizontalOptions="Center"   CornerRadius="0" HeightRequest="33" WidthRequest="75" FontSize="13" BackgroundColor="Transparent" TextColor="White" />
+
+            <Image Grid.Row="5" Grid.ColumnSpan="4" Source="startup.png"
+       WidthRequest="{OnPlatform iOS=300, Android=250}"
+       HorizontalOptions="Center"
+       VerticalOptions="End"            />
+
+
+
         </Grid>
         
     </ContentPage.Content>

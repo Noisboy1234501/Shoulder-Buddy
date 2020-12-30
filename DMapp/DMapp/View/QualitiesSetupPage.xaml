@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DMapp.View.QualitiesSetupPage"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              x:Name="QSetupPage">
     
     <ContentPage.Content>
@@ -14,7 +15,7 @@
             
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2.2*"/>
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="*"/>
@@ -25,6 +26,26 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source= "DashboardStyles.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <gradient:SfGradientView Grid.RowSpan="6" Grid.ColumnSpan="5">
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush >
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="{DynamicResource Liliac}" Offset="0.0" />
+                            <gradient:SfGradientStop Color="{DynamicResource Purpleish-Blue}" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
+
             <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Placeholder="Quality's name" Text="{Binding QualityName}" HorizontalOptions="EndAndExpand" WidthRequest="300" HorizontalTextAlignment="Center" />
             <Button Grid.Row="2" BackgroundColor="{Binding ButtonColor}" Command="{Binding PlusButtonClickedCommand}" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center" Text="+"  TranslationX="0" Style="{StaticResource PlusButtonStyle}" />
             <Button Grid.Row="1" Command="{Binding ContinueButtonClickedCommand}" Grid.Column="3"  Text="Continue" VerticalOptions="Center" HorizontalOptions="End"  TranslationX="0" Style="{StaticResource ContinueButtonStyle}"/>

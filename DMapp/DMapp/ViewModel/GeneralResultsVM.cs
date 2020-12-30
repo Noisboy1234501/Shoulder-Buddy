@@ -49,7 +49,7 @@ namespace DMapp.ViewModel
         {
             if(Mode == 0)
             {
-                TemporaryDb.InsertDataToSQLiteDB(); // make it async in the future to avoid blocking UI when huge number of data is inserted to sqlite data base.
+            await Task.Run(() => TemporaryDb.InsertDataToSQLiteDB()); // make it async in the future to avoid blocking UI when huge number of data is inserted to sqlite data base.
             }
             await navigation.PopToRootAsync();
         }

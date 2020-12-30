@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DMapp.View.OptionsSetupPage"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              x:Name="OSetupPage">
     <ContentPage.Content>
         
@@ -27,6 +28,26 @@
                     <RowDefinition Height="*"/>
                 <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source= "DashboardStyles.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <gradient:SfGradientView Grid.RowSpan="6" Grid.ColumnSpan="4">
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush >
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="{DynamicResource Liliac}" Offset="0.0" />
+                            <gradient:SfGradientStop Color="{DynamicResource Purpleish-Blue}" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
+
             <Entry Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"  Placeholder="Option's name like: Audi" Text="{Binding OptionName}" HorizontalOptions="EndAndExpand" WidthRequest="300" HorizontalTextAlignment="Center" />
                 <Button Grid.Row="2" Command="{Binding PlusButtonClickedCommand}" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="Center" HorizontalOptions="Center" Text="+" CornerRadius="30" BackgroundColor="{Binding ButtonColor}" WidthRequest="40" HeightRequest="40" TextColor="White" TranslationX="0" />
                 <Button Grid.Row="1" Command="{Binding ContinueButtonClickedCommand}" Grid.Column="3"  Text="Continue" VerticalOptions="Center" HorizontalOptions="End"  CornerRadius="30" BackgroundColor="LightBlue" TextColor="White" TranslationX="0"/>

@@ -375,12 +375,9 @@ namespace DMapp.ViewModel
 
         private void SaveResultsToTemporaryDb()
         {
-            var reversedOrder = QualitiesChoiceSliderValuesHolder.SliderValues;
-            for(int i = 0; i < reversedOrder.Count(); i++)
-            {
-                reversedOrder[i] = 1 - reversedOrder[i];
-            }
-            double[] qualitiesImportance = DecisionSystem.CalculateQualitiesScores(Sequence, reversedOrder, QualitiesNames.Count);
+             
+            
+            double[] qualitiesImportance = DecisionSystem.CalculateQualitiesScores(Sequence, QualitiesChoiceSliderValuesHolder.SliderValues, QualitiesNames.Count);
             TemporaryDb.qualitiesImportance = qualitiesImportance.ToList();
             //var resultsCheck = TemporaryDb.qualitiesImportance;
         }

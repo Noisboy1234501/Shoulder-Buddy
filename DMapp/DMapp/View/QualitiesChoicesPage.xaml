@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gradient ="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
              x:Class="DMapp.View.QualitiesChoicesPage">
     <ContentPage.Content>
         <Grid>
@@ -48,6 +49,24 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source= "DashboardStyles.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+
+            <gradient:SfGradientView Grid.RowSpan="6" Grid.ColumnSpan="4">
+                <gradient:SfGradientView.BackgroundBrush>
+                    <gradient:SfLinearGradientBrush >
+                        <gradient:SfLinearGradientBrush.GradientStops>
+                            <gradient:SfGradientStop Color="{DynamicResource Liliac}" Offset="0.0" />
+                            <gradient:SfGradientStop Color="{DynamicResource Purpleish-Blue}" Offset="1.0" />
+                        </gradient:SfLinearGradientBrush.GradientStops>
+                    </gradient:SfLinearGradientBrush>
+                </gradient:SfGradientView.BackgroundBrush>
+            </gradient:SfGradientView>
             <!--Frames-->
             <Frame IsVisible="{Binding IsVisibleFrame1}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" Grid.RowSpan="3" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="0" />
             <Frame IsVisible="{Binding IsVisibleFrame2}" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="4" Grid.RowSpan="3" BackgroundColor="Transparent" BorderColor="Black" CornerRadius="0"/>
